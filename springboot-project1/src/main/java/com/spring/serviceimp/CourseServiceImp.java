@@ -1,6 +1,7 @@
 package com.spring.serviceimp;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -39,7 +40,7 @@ public class CourseServiceImp implements CourseService {
 
 	@Override
 	public List<ResponCourse> findAll() {
-		return courseRepo.findAll().stream().map(ResponCourse::from).toList();
+		return courseRepo.findAll().stream().map(ResponCourse::from).collect(Collectors.toList());
 	}
 
 	@Override

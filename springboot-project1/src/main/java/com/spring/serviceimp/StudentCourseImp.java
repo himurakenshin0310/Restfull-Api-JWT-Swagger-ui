@@ -1,6 +1,7 @@
 package com.spring.serviceimp;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class StudentCourseImp implements StudentCourseService {
 
 	@Override
 	public StudentCourse save(StudentCourseDto dto) throws Exception {
-		if(checkDuplicateData(dto.getStudentId(), dto.getCourseId()))
+		if (checkDuplicateData(dto.getStudentId(), dto.getCourseId()))
 			throw new Exception("Student already have in course!");
 		StudentCourse s = new StudentCourse();
 		s.setCourse(courseRepo.findById(dto.getCourseId()).get());
@@ -42,7 +43,7 @@ public class StudentCourseImp implements StudentCourseService {
 
 	@Override
 	public List<StudentCourseDto> findAll() {
-		return studentCourseRepo.findAll().stream().map(StudentCourseDto::from).toList();
+		return studentCourseRepo.findAll().stream().map(StudentCourseDto::from).collect(Collectors.toList());
 	}
 
 	@Autowired

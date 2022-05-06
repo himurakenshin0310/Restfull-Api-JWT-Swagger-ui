@@ -1,6 +1,7 @@
 package com.spring.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.spring.entity.Teacher;
 
@@ -23,7 +24,7 @@ public class ResponTeacher {
 		rs.setId(teacher.getId());
 		rs.setName(teacher.getName());
 		rs.setBirthDate(teacher.getBrithdate().toString());
-		rs.setLstCourse(teacher.getCourses().stream().map(CourseDto::from).toList());
+		rs.setLstCourse(teacher.getCourses().stream().map(CourseDto::from).collect(Collectors.toList()));
 		return rs;
 	}
 }

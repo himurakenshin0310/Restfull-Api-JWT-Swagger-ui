@@ -2,6 +2,7 @@ package com.spring.serviceimp;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -23,7 +24,7 @@ public class StudentServiceImp implements StudentService {
 
 	@Override
 	public List<ResponStudent> lstStudentDto() {
-		return studentRepo.findAll().stream().map(ResponStudent::from).toList();
+		return studentRepo.findAll().stream().map(ResponStudent::from).collect(Collectors.toList());
 	}
 
 	@Override

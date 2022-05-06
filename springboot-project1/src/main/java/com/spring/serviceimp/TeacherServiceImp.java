@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -33,7 +34,7 @@ public class TeacherServiceImp implements TeacherService {
 
 	@Override
 	public List<ResponTeacher> lstTeacherDto() {
-		return teacherRepo.findAll().stream().map(ResponTeacher::from).toList();
+		return teacherRepo.findAll().stream().map(ResponTeacher::from).collect(Collectors.toList());
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class TeacherServiceImp implements TeacherService {
 
 	@Override
 	public void deleteById(long id) throws Exception {
-		if (courseRepo.checkIfHaveTeacher(id)!= null)
+		if (courseRepo.checkIfHaveTeacher(id) != null)
 			throw new Exception("The teacher have course so cant remove!");
 		teacherRepo.deleteById(id);
 
